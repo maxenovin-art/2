@@ -1,39 +1,63 @@
-# Reservation System (Next.js + SQLite + Prisma) — Option 2
+# 🏨 سیستم رزرواسیون (Next.js + SQLite)
 
-This repository is a scaffold for a reservation system (hotel/taxi/doctor) using **Next.js** (pages router),
-**SQLite** with **Prisma**, and **manual JWT auth**. It is designed for deploy to **Vercel** and local command-line usage.
+این پروژه یک سیستم رزرواسیون ساده و کامل است که با **Next.js** و **SQLite (Prisma ORM)** ساخته شده  
+و قابلیت اجرا هم در **PowerShell / Command Prompt (محلی)** و هم در **Vercel (آنلاین)** را دارد.  
 
-Features included:
-- Search & filter by time / location / category
-- Create and cancel reservations
-- Payment simulation endpoint
-- Email / SMS notifications (simulated with nodemailer / Twilio stubs)
-- Admin dashboard to manage reservations
-- Concurrency handling via SQLite transactions and optimistic locking
+نسخه‌ی آنلاین پروژه:  
+🔗 [https://3-1bxl.vercel.app/](https://3-1bxl.vercel.app/)
 
-## Quickstart (local / command prompt)
-1. Copy `.env.example` to `.env` and edit values.
-2. Install deps:
-   ```
-   npm install
-   ```
-3. Init Prisma and SQLite:
-   ```
-   npx prisma migrate dev --name init
-   ```
-4. Run dev server:
-   ```
-   npm run dev
-   ```
-5. Use `curl` or any HTTP client to call API endpoints in `pages/api/*`.
+---
 
-## Deploy to Vercel
-- Push to GitHub and import project into Vercel.
-- Add environment variables (DATABASE_URL, JWT_SECRET, etc.) in Vercel dashboard.
-- For SQLite on Vercel: either use a hosted DB (Postgres) or enable filesystem persistence via Vercel's recommendations.
-  For production consider switching `DATABASE_URL` to a managed Postgres and update `prisma/schema.prisma`.
+## ⚙️ معرفی پروژه
+این سیستم امکانات زیر را دارد:
 
-## Notes
-- This scaffold focuses on structure and core logic. You may replace SMS/email providers with real accounts.
-- Concurrency: Reservation creation uses a check-then-insert wrapped in a transaction and optimistic locking on update.
+- جستجو و فیلتر بر اساس زمان، مکان، یا دسته‌بندی  
+- رزرو و لغو رزرو  
+- شبیه‌سازی پرداخت آنلاین  
+- ارسال نوتیفیکیشن ایمیل پس از رزرو  
+- داشبورد ادمین برای مدیریت رزروها  
+- جلوگیری از رزرو همزمان (Concurrency Handling)  
+- احراز هویت JWT برای کاربران  
+
+---
+
+## 📋 پیش‌نیازها
+برای اجرای پروژه نیاز دارید به:
+
+- **Node.js** نسخه 18 یا بالاتر  
+- **npm** (نصب‌شده همراه Node.js)  
+- نیاز به هیچ پایگاه‌داده‌ی جدا نیست (SQLite به صورت فایل درون پروژه ساخته می‌شود)
+
+---
+
+## 💻 نحوه نصب و اجرا (در PowerShell یا Command Prompt)
+
+### 1️⃣ نصب وابستگی‌ها
+```bash
+npm install
+2️⃣ ایجاد و آماده‌سازی پایگاه داده
+bash
+Copy code
+npx prisma migrate dev --name init
+این دستور فایل دیتابیس SQLite (dev.db) را ایجاد می‌کند.
+
+3️⃣ اجرای پروژه
+bash
+Copy code
+npm run dev
+حالا پروژه روی آدرس زیر در دسترس است:
+🔗 http://localhost:3000
+
+🌍 نسخه آنلاین
+می‌توانید نسخه‌ی دیپلوی‌شده‌ی پروژه را در ورسل ببینید:
+🔗 https://3-1bxl.vercel.app/
+
+🧩 فایل‌های مهم
+.env → تنظیمات محیطی (JWT_SECRET، EMAIL_FROM، و DATABASE_URL)
+
+vercel.json → تنظیمات مخصوص دیپلوی در Vercel
+
+prisma/schema.prisma → ساختار دیتابیس SQLite
+
+pages/api → APIهای اصلی پروژه (Auth, CRUD, Reservation)
 
