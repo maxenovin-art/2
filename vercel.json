@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "framework": "nextjs",
+  "env": {
+    "DATABASE_URL": "file:./dev.db",
+    "JWT_SECRET": "4c8e29f9a8b74a3c9b7c40cbb89b79f5",
+    "EMAIL_FROM": "no-reply@reservation-demo.local"
+  },
+  "routes": [
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}
